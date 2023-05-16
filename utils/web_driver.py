@@ -44,4 +44,4 @@ class CustomWebDriver:
 
 custom_driver = CustomWebDriver()
 custom_driver.open_url()
-custom_driver.search_item("Принтер")
+custom_driver.search_item("принтер")
