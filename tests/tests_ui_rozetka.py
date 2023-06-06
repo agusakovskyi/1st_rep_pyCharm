@@ -9,3 +9,4 @@ class TestsRozetka(unittest.TestCase):
 
     def test_search_item_via_main_search(self):
         self.rozetka_utils.search_item('Принтер')
+        self.rozetka_utils.select_item_from_grid('Принтер')

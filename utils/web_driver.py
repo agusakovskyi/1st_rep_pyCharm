@@ -34,3 +34,15 @@ class CustomWebDriver:
         elem = self.wait_web_element(element)
         elem.send_keys(text)
 
+    @staticmethod
+    def format_selector(selector, text):
+
+        selector_formatted = (selector[0], selector[1] % text)
+        return selector_formatted
+
+    def get_attribute_text(self, selector, attribute='title'):
+        elem = self.wait_web_element(selector)
+        attribute_text = elem.get_attribute(attribute)
+        return attribute_text
+
+
