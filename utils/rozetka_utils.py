@@ -10,7 +10,7 @@ class RozetkaUtils:
         self.search_input = (By.XPATH, "//input[@name='search']")
         self.search_title = (By.XPATH, "//h1[@class='catalog-heading ng-star-inserted']")
         self.search_item_grid = (By.XPATH, "//li[contains(@class, 'catalog-grid')]//a[contains(@title, '%s')]")
-        self.main_item_title = (By.XPATH, )
+        self.main_item_title = (By.XPATH, "//h1[@class='product__title']")
 
     def open_rozetka_page(self):
         self.custom_driver.open_url(self.url)
@@ -24,8 +24,12 @@ class RozetkaUtils:
     def select_item_from_grid(self, text: str):
         selector = self.custom_driver.format_selector(self.search_item_grid, text)
         item_title_search = self.custom_driver.get_attribute_text(selector)
+        clickable_element = f"{selector[1]}//.."
+        selector = list(selector)
+        selector[1] = clickable_element
+        selector = tuple(selector)
         self.custom_driver.click_web_element(selector)
-        title = self.custom_driver.wait_web_element(self. main_item_title).text
+        title = self.custom_driver.wait_web_element(self.main_item_title).text
         assert item_title_search == title, f"Actual title: {title} doesn't match with expected: {item_title_search}"
 
 
