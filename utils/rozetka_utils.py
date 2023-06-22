@@ -14,7 +14,7 @@ class RozetkaUtils:
         self.prod_prc = (By.XPATH, "//div[contains(@class, 'product-price')]//p[contains(@class, 'product-price__big')]")
         self.buy_button = (By.XPATH, "//rz-product-buy-btn[contains(@class, 'product-button__buy')]//button")
         self.current_prod_price = (By.XPATH, "//div[contains(@class, 'cart-receipt__sum-price')]//span")
-        self.current_item_title = (By.XPATH, "//div[contains(@class, 'cart-product__main')]//a[contains(@title, '')]")
+        self.current_item_title = (By.XPATH, "//div[contains(@class, 'cart-product__main')]//a")
 
 
     def open_rozetka_page(self):
@@ -34,17 +34,16 @@ class RozetkaUtils:
         selector[1] = clickable_element
         selector = tuple(selector)
         self.custom_driver.click_web_element(selector)
-        title = self.custom_driver.wait_web_element(self.main_item_title).text
-        assert item_title_search == title, f"Actual title: {title} doesn't match with expected: {item_title_search}"
+        self.title = self.custom_driver.wait_web_element(self.main_item_title).text
+        assert item_title_search == self.title, f"Actual title: {self.title} doesn't match with expected: {item_title_search}"
 
-    def buy_product(self):
+    def validate_selected_product_in_cart(self):
         price_on_page = self.custom_driver.wait_web_element(self.prod_prc).text
-        title = self.custom_driver.wait_web_element(self.main_item_title).text
         self.custom_driver.click_web_element(self.buy_button)
         current_price = self.custom_driver.wait_web_element(self.current_prod_price).text
         current_title = self.custom_driver.wait_web_element(self.current_item_title).text
         assert price_on_page == current_price, f"Actual price: {current_price} doesn't match with expected: {price_on_page}"
-        assert title == current_title, f"Actual item: {current_title} doesn't match with expected: {title}"
+        assert self.title == current_title, f"Actual item: {current_title} doesn't match with expected: {self.title}"
 
 
 
