@@ -7,7 +7,7 @@ class RozetkaUtils:
         self.custom_driver = CustomWebDriver()
 
         self.search_icon = (By.XPATH, "//button[contains(@class, 'submit ng-star-inserted')]")
-        self.search_input = (By.XPATH, "//input[@name='search']")
+        self.search_input = (By.XPATH, "//input[@name='sear ch']")
         self.search_title = (By.XPATH, "//h1[@class='catalog-heading ng-star-inserted']")
         self.search_item_grid = (By.XPATH, "//li[contains(@class, 'catalog-grid')]//a[contains(@title, '%s')]")
         self.main_item_title = (By.XPATH, "//h1[@class='product__title']")
